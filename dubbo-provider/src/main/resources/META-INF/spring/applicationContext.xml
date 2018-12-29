@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-2.5.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 自动扫描 -->
+	<!-- <dubbo:annotation package="com.liuchao.dubbo.provider" /> -->
+
+	<!-- dubbo应用的名称 -->
+	<dubbo:application name="dubbo-provider"></dubbo:application>
+
+	<!-- dubbo应用注册到zk -->
+	<dubbo:registry address="zookeeper://192.168.1.247:2181"></dubbo:registry>
+
+	<dubbo:protocol name="dubbo" port="20882"></dubbo:protocol>
+    
+    <dubbo:protocol name="rest" port="8080" server="tomcat" contextpath="/provider"></dubbo:protocol>
+    
+	<bean id="personInfoService" class="com.liuchao.dubbo.provider.PersonInfoServiceImpl"></bean>
+
+	<!-- 服务端对外开放提供服务的接口 -->
+	<dubbo:service
+		interface="com.liuchao.dubbo.api.PersonInfoService" protocol="dubbo,rest"
+		ref="personInfoService"></dubbo:service>
+
+
+
+</beans>
