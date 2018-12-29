@@ -27,7 +27,7 @@ public class Consumer {
         
         CheckPersonStatus checkPersonStatus = context.getBean(CheckPersonStatus.class);
         System.out.println(checkPersonStatus.checkAllPersonStatus());
-        System.out.println(checkPersonStatus.checkPersonStatusByPersonNumber("12345678"));
+        System.out.println(checkPersonStatus.checkPersonStatusByPersonNumber("1"));
         
         HttpClient httpClient = HttpClientBuilder.create().build();
         RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(3000)
